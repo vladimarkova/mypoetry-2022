@@ -1,9 +1,10 @@
-function App() {
+import Layout from './Layout';
 
+function App() {
   return (
-    <div className="App">
-      <h1>Learn React</h1>
-    </div>
+    <>
+      <Layout />
+    </>
   );
 }
 
