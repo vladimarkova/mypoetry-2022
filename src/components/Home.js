@@ -1,10 +1,14 @@
 import React from 'react';
 import PoetryCards from './PoetryCards';
 
-const Home = ({ poetries }) => {
+const Home = ({ poetries, handleClick, handleNextPage }) => {
   return (
     <div>
-      <PoetryCards poetries={poetries} />
+      <PoetryCards
+        poetries={poetries}
+        handleClick={handleClick}
+        handleNextPage={handleNextPage}
+      />
     </div>
   );
 };
