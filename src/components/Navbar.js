@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 const MPNavbar = () => {
   return (
     <>
-      <Navbar sticky='top' bg='dark' variant='dark'>
+      <Navbar fixed='top' bg='dark' variant='dark'>
         <Container fluid>
           <Navbar.Brand>
             <img
