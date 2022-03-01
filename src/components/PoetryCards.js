@@ -9,6 +9,7 @@ const PoetryCards = ({
   handleNextPage,
   handlePrevPage,
   showLeftArrow,
+  showRightArrow,
 }) => {
   return (
     <>
@@ -27,11 +28,13 @@ const PoetryCards = ({
             handleClick={handleClick}
           />
         ))}
-        <BsArrowUpRightCircleFill
-          className='toggle-page-arrow'
-          size={20}
-          onClick={handleNextPage}
-        />
+        {showRightArrow === true ? (
+          <BsArrowUpRightCircleFill
+            className='toggle-page-arrow'
+            size={20}
+            onClick={handleNextPage}
+          />
+        ) : null}
       </div>
     </>
   );

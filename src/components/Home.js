@@ -7,6 +7,7 @@ const Home = ({
   handleNextPage,
   handlePrevPage,
   showLeftArrow,
+  showRightArrow
 }) => {
   return (
     <div>
@@ -16,6 +17,7 @@ const Home = ({
         handleNextPage={handleNextPage}
         handlePrevPage={handlePrevPage}
         showLeftArrow={showLeftArrow}
+        showRightArrow={showRightArrow}
       />
     </div>
   );

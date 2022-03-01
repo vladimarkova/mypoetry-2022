@@ -66,6 +66,60 @@ function App() {
       date: date,
       front: true,
     },
+    {
+      id: 7,
+      title: '',
+      content: 'Some Test Content4',
+      img: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201904/book_1.jpeg?WxnRLsMs9tHe1arG3XGrm6xdSZt.GoGt&size=770:433',
+      joke: 'Ако жена ви след скандала, много бързо се е успокоила и ви е простила, \n това значи, че вече е измислила, как да ви отмъсти.',
+      date: date,
+      front: true,
+    },
+    {
+      id: 8,
+      title: '',
+      content: 'Some Test Content5',
+      img: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201904/book_1.jpeg?WxnRLsMs9tHe1arG3XGrm6xdSZt.GoGt&size=770:433',
+      joke: 'Ако жена ви след скандала, много бързо се е успокоила и ви е простила, \n това значи, че вече е измислила, как да ви отмъсти.',
+      date: date,
+      front: true,
+    },
+    {
+      id: 9,
+      title: '',
+      content: 'Some Test Content6',
+      img: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201904/book_1.jpeg?WxnRLsMs9tHe1arG3XGrm6xdSZt.GoGt&size=770:433',
+      joke: 'Ако жена ви след скандала, много бързо се е успокоила и ви е простила, \n това значи, че вече е измислила, как да ви отмъсти.',
+      date: date,
+      front: true,
+    },
+    {
+      id: 10,
+      title: '',
+      content: 'Some Test Content7',
+      img: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201904/book_1.jpeg?WxnRLsMs9tHe1arG3XGrm6xdSZt.GoGt&size=770:433',
+      joke: 'Ако жена ви след скандала, много бързо се е успокоила и ви е простила, \n това значи, че вече е измислила, как да ви отмъсти.',
+      date: date,
+      front: true,
+    },
+    {
+      id: 11,
+      title: '',
+      content: 'Some Test Content8',
+      img: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201904/book_1.jpeg?WxnRLsMs9tHe1arG3XGrm6xdSZt.GoGt&size=770:433',
+      joke: 'Ако жена ви след скандала, много бързо се е успокоила и ви е простила, \n това значи, че вече е измислила, как да ви отмъсти.',
+      date: date,
+      front: true,
+    },
+    {
+      id: 12,
+      title: '',
+      content: 'Some Test Content9',
+      img: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201904/book_1.jpeg?WxnRLsMs9tHe1arG3XGrm6xdSZt.GoGt&size=770:433',
+      joke: 'Ако жена ви след скандала, много бързо се е успокоила и ви е простила, \n това значи, че вече е измислила, как да ви отмъсти.',
+      date: date,
+      front: true,
+    },
   ];
 
   // const testPoetry = {
@@ -81,11 +135,17 @@ function App() {
   const numberOfPoetriesOnPage = 3;
   const [currentStartIndex, setCurrentStartIndex] = useState(3);
   const [poetries, setPoetries] = useState([]);
-  const [showLeftArrow, setShowLeftArrow] = useState(true);
 
   useEffect(() => {
     setPoetries(allPoetries.slice(0, 3));
   }, []);
+
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
+
+  // poetries[poetries.length - 1] === allPoetries[allPoetries.length - 1]
+  //     ? false
+  //     : true
 
   const handleClick = (id) => {
     const poetry = poetries.find((poetry) => poetry.id === id);
@@ -112,9 +172,20 @@ function App() {
     console.log(currentStartIndex);
     setPoetries(newPoetries);
     console.log(newPoetries);
+
+    setShowLeftArrow(true);
+    setShowLeftArrow(true);
+
+    if (
+      newPoetries[newPoetries.length - 1] ===
+      allPoetries[allPoetries.length - 1]
+    ) {
+      setShowRightArrow(false);
+      setShowRightArrow(false);
+    }
   };
 
-  const handlePrevPage = () => {    
+  const handlePrevPage = () => {
     console.log(showLeftArrow);
     console.log('prev page loading...');
     console.log(currentStartIndex);
@@ -124,6 +195,12 @@ function App() {
       currentStartIndex - numberOfPoetriesOnPage
     );
     setPoetries(newPoetries);
+    if (newPoetries[0] === allPoetries[0]) {
+      setShowLeftArrow(false);
+      setShowLeftArrow(false);
+    }
+    setShowRightArrow(true);
+    setShowRightArrow(true);
   };
 
   return (
@@ -138,6 +215,7 @@ function App() {
               handleNextPage={handleNextPage}
               handlePrevPage={handlePrevPage}
               showLeftArrow={showLeftArrow}
+              showRightArrow={showRightArrow}
             />
           }
         />
