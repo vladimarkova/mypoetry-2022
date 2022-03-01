@@ -9,9 +9,17 @@ const Footer = ({ poetryCount }) => {
       <Navbar className='py-0' fixed='bottom' bg='dark' variant='dark'>
         <Container fluid>
           <Navbar.Brand>Поезия за твоята душа</Navbar.Brand>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
             <BsBookmarkCheck style={{ color: 'white' }} />
-            <div style={{ color: 'white', fontSize: '20px', marginLeft: '6px' }}>
+            <div
+              style={{ color: 'white', fontSize: '20px', marginLeft: '6px' }}
+            >
               {poetryCount}
             </div>
           </div>

@@ -133,3 +133,15 @@ body {
 .number-of-poetries-circle {
   color: white;
 }
+
+.input-section {
+  width: 50%;
+  height: 50vh;
+  margin-top: 20px;
+  margin-left: 15px;
+}
+
+.form-elements {
+  display: flex;
+  justify-content: space-around;
+}
