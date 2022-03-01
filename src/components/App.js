@@ -141,11 +141,9 @@ function App() {
   }, []);
 
   const [showLeftArrow, setShowLeftArrow] = useState(false);
-  const [showRightArrow, setShowRightArrow] = useState(true);
-
-  // poetries[poetries.length - 1] === allPoetries[allPoetries.length - 1]
-  //     ? false
-  //     : true
+  const [showRightArrow, setShowRightArrow] = useState(
+    allPoetries.length === numberOfPoetriesOnPage ? false : true
+  );
 
   const handleClick = (id) => {
     const poetry = poetries.find((poetry) => poetry.id === id);
