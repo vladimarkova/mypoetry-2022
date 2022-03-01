@@ -1,5 +1,7 @@
 import Layout from './Layout';
 import Home from './Home';
+import NewPoetry from './NewPoetry';
+import About from './About';
 import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
@@ -217,6 +219,10 @@ function App() {
             />
           }
         />
+        <Route path='poetry'>
+          <Route index element={<NewPoetry />} />
+        </Route>
+        <Route path='about' element={<About />} />
       </Route>
     </Routes>
   );
