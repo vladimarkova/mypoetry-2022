@@ -1,6 +1,6 @@
 import Layout from './Layout';
 import Home from './Home';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -65,7 +65,7 @@ function App() {
       joke: 'Ако жена ви след скандала, много бързо се е успокоила и ви е простила, \n това значи, че вече е измислила, как да ви отмъсти.',
       date: date,
       front: true,
-    }
+    },
   ];
 
   // const testPoetry = {
@@ -79,13 +79,13 @@ function App() {
   // };
 
   const numberOfPoetriesOnPage = 3;
-  const [currentStartIndex, setCurrentStartIndex] = useState(0);
-  const [poetries, setPoetries] = useState(
-    allPoetries.slice(
-      currentStartIndex,
-      currentStartIndex + numberOfPoetriesOnPage
-    )
-  );
+  const [currentStartIndex, setCurrentStartIndex] = useState(3);
+  const [poetries, setPoetries] = useState([]);
+  const [showLeftArrow, setShowLeftArrow] = useState(true);
+
+  useEffect(() => {
+    setPoetries(allPoetries.slice(0, 3));
+  }, []);
 
   const handleClick = (id) => {
     const poetry = poetries.find((poetry) => poetry.id === id);
@@ -103,17 +103,32 @@ function App() {
 
   const handleNextPage = () => {
     console.log('next page loading...');
+    console.log(currentStartIndex);
     setCurrentStartIndex(currentStartIndex + numberOfPoetriesOnPage);
     const newPoetries = allPoetries.slice(
       currentStartIndex,
       currentStartIndex + numberOfPoetriesOnPage
+    );
+    console.log(currentStartIndex);
+    setPoetries(newPoetries);
+    console.log(newPoetries);
+  };
+
+  const handlePrevPage = () => {    
+    console.log(showLeftArrow);
+    console.log('prev page loading...');
+    console.log(currentStartIndex);
+    setCurrentStartIndex(currentStartIndex - numberOfPoetriesOnPage);
+    const newPoetries = allPoetries.slice(
+      currentStartIndex - numberOfPoetriesOnPage * 2,
+      currentStartIndex - numberOfPoetriesOnPage
     );
     setPoetries(newPoetries);
   };
 
   return (
     <Routes>
-      <Route path='/' element={<Layout poetryCount={poetries.length} />}>
+      <Route path='/' element={<Layout poetryCount={allPoetries.length} />}>
         <Route
           index
           element={
@@ -121,6 +136,8 @@ function App() {
               poetries={poetries}
               handleClick={handleClick}
               handleNextPage={handleNextPage}
+              handlePrevPage={handlePrevPage}
+              showLeftArrow={showLeftArrow}
             />
           }
         />

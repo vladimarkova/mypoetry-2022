@@ -120,12 +120,16 @@ body {
   color: red;
 }
 
-#next-page-arrow {
+.toggle-page-arrow {
   transition: 300ms;
   transition-property: color;
 }
 
-#next-page-arrow:hover {
+.toggle-page-arrow:hover {
   cursor: pointer;
   color: rgb(87, 101, 126);
+}
+
+.number-of-poetries-circle {
+  color: white;
 }
