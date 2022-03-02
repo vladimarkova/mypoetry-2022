@@ -5,11 +5,12 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
-const MPDatePicker = ({ startDate, setStartDate }) => {
+const MPDatePicker = ({ startDate, setStartDate, setDate }) => {
   return (
     <DatePicker
       selected={startDate}
       onChange={date => setStartDate(date)}
+      onSelect={date => setDate(date)}
     />
   );
 };

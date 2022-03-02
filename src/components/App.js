@@ -138,6 +138,13 @@ function App() {
   const [currentStartIndex, setCurrentStartIndex] = useState(3);
   const [poetries, setPoetries] = useState([]);
 
+  const [newPoetryTitle, setNewPoetryTitle] = useState('');
+  const [newPoetryContent, setNewPoetryContent] = useState('');
+  const [newPoetryImg, setNewPoetryImg] = useState('');
+  const [newPoetryJoke, setNewPoetryJoke] = useState('');
+  const [newPoetryFace, setNewPoetryFace] = useState(true);
+  const [newPoetryDate, setNewPoetryDate] = useState(new Date());
+
   useEffect(() => {
     setPoetries(allPoetries.slice(0, 3));
   }, []);
@@ -203,6 +210,16 @@ function App() {
     setShowRightArrow(true);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(newPoetryTitle);
+    console.log(newPoetryContent);
+    console.log(newPoetryImg);
+    console.log(newPoetryJoke);
+    console.log(newPoetryFace);
+    console.log(newPoetryDate);
+  };
+
   return (
     <Routes>
       <Route path='/' element={<Layout poetryCount={allPoetries.length} />}>
@@ -220,7 +237,25 @@ function App() {
           }
         />
         <Route path='poetry'>
-          <Route index element={<NewPoetry />} />
+          <Route
+            index
+            element={
+              <NewPoetry
+                handleSubmit={handleSubmit}
+                newPoetryTitle={newPoetryTitle}
+                setNewPoetryTitle={setNewPoetryTitle}
+                newPoetryContent={newPoetryContent}
+                setNewPoetryContent={setNewPoetryContent}
+                newPoetryImg={newPoetryImg}
+                setNewPoetryImg={setNewPoetryImg}
+                newPoetryJoke={newPoetryJoke}
+                setNewPoetryJoke={setNewPoetryJoke}
+                newPoetryFace={newPoetryFace}
+                setNewPoetryFace={setNewPoetryFace}
+                setNewPoetryDate={setNewPoetryDate}
+              />
+            }
+          />
         </Route>
         <Route path='about' element={<About />} />
       </Route>
