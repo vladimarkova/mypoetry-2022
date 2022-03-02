@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
@@ -21,7 +21,8 @@ const NewPoetry = ({
   const [startDate, setStartDate] = useState(new Date());
   const setDate = (date) => {
       setNewPoetryDate(date);
-  }
+  };
+  const elTitle = useRef();
 
   return (
     <div className='input-section'>
@@ -31,6 +32,7 @@ const NewPoetry = ({
             <Form.Group className='mb-3' controlId='title'>
               <Form.Label>Заглавие</Form.Label>
               <Form.Control
+                ref={elTitle}
                 value={newPoetryTitle}
                 onChange={(e) => setNewPoetryTitle(e.target.value)}
                 type='text'
@@ -55,7 +57,7 @@ const NewPoetry = ({
                 label='Лице'
               />
             </Form.Group>
-            <Button variant='success' type='submit'>
+            <Button variant='success' type='submit' onClick={() => elTitle.current.focus()}>
               Запиши
             </Button>
           </div>

@@ -3,7 +3,8 @@ import Home from './Home';
 import NewPoetry from './NewPoetry';
 import About from './About';
 import { useState, useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
 
 function App() {
   const text1 =
@@ -134,9 +135,12 @@ function App() {
   //   front: true,
   // };
 
+  const navigate = useNavigate();
+
   const numberOfPoetriesOnPage = 3;
   const [currentStartIndex, setCurrentStartIndex] = useState(3);
   const [poetries, setPoetries] = useState([]);
+  const [poetryCount, setPoetryCount] = useState(allPoetries.length);
 
   const [newPoetryTitle, setNewPoetryTitle] = useState('');
   const [newPoetryContent, setNewPoetryContent] = useState('');
@@ -149,10 +153,29 @@ function App() {
     setPoetries(allPoetries.slice(0, 3));
   }, []);
 
+  useEffect(() => {
+    setPoetryCount(allPoetries.length);
+    console.log('CHANGE...!');
+  }, [allPoetries.length]);
+
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(
     allPoetries.length === numberOfPoetriesOnPage ? false : true
   );
+
+  const addItem = (data) => {
+    allPoetries.push(data);
+    console.log(allPoetries.length);
+  };
+
+  const clearAddPoetryForm = () => {
+    setNewPoetryTitle('');
+    setNewPoetryContent('');
+    setNewPoetryImg('');
+    setNewPoetryJoke('');
+    setNewPoetryFace(true);
+    setNewPoetryDate(new Date());
+  };
 
   const handleClick = (id) => {
     const poetry = poetries.find((poetry) => poetry.id === id);
@@ -212,17 +235,29 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(newPoetryTitle);
-    console.log(newPoetryContent);
-    console.log(newPoetryImg);
-    console.log(newPoetryJoke);
-    console.log(newPoetryFace);
-    console.log(newPoetryDate);
+
+    // const newPoetryId = (allPoetries.length ? allPoetries[allPoetries.length - 1].id + 1 : 1);
+    const newPoetryId = allPoetries.length;
+
+    const newPoetry = {
+      id: newPoetryId,
+      title: newPoetryTitle,
+      content: newPoetryContent,
+      img: newPoetryImg,
+      joke: newPoetryJoke,
+      date: format(newPoetryDate, 'yyyy-MM-dd'),
+      front: newPoetryFace,
+    };
+
+    addItem(newPoetry);
+    clearAddPoetryForm();
+    navigate('/');
+    window.alert(`Успешно добавихте стих ${newPoetryTitle}!`);
   };
 
   return (
     <Routes>
-      <Route path='/' element={<Layout poetryCount={allPoetries.length} />}>
+      <Route path='/' element={<Layout poetryCount={poetryCount} />}>
         <Route
           index
           element={
