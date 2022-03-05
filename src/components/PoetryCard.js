@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import { format } from 'date-fns';
 import { GiNotebook } from 'react-icons/gi';
 import { FaRegHeart } from 'react-icons/fa';
 
@@ -38,7 +37,7 @@ const PoetryCard = ({ poetry, handleClick }) => {
           )}
         </Card.Body>
         <Card.Footer className='text-muted text-center'>
-          {format(poetry.date, 'yyy-MM-dd')}
+          {poetry.date}
         </Card.Footer>
       </Card>
     </div>

@@ -13,7 +13,7 @@ function App() {
     '\n Щастие ти мое. \n Мое мило златно щастие. \n Пак ли се търкаля във порои... \n Пак ли ме забрави. Как са там захласите? \n\n Но знам каква е пролетта. \n Знам! Усещам, че ще бъде пролет! \n По-красива от звезда!  \n По-сияйна и отново. Аз се моля...  \n\n Беше тихо. Беше нежно.  \n Беше толкова спокойно. А в живота...  \n Нищо не е безнадеждно.  \n Падаш, ставаш, тичаш. Хващаш днешната посока.';
   const text3 =
     '\n И така вървим полека \n Ей така се смее и света \n Уж проправя ти пътека \nТуко-виж те хванал за носа \n\n А пък ти вървиш полека  \n Виждам пак се смееш на света  \n И не вярваш, че е леко \n Но вървиш, вървиш. Ура! \n\n А цъфти отново всяка пролет \n И умира всеки светъл и прекрасен ден \n Ражда се красив, отворен \n А човекът пак върви. Но леко уморен';
-  const date = new Date();
+  const date = format(new Date(), 'yyyy-MM-dd');
   const allPoetries = [
     {
       id: 1,
@@ -135,12 +135,14 @@ function App() {
   //   front: true,
   // };
 
+  const poetryData = JSON.parse(localStorage.getItem('poetries'));
+
   const navigate = useNavigate();
 
   const numberOfPoetriesOnPage = 3;
   const [currentStartIndex, setCurrentStartIndex] = useState(3);
-  const [poetries, setPoetries] = useState([]);
-  const [poetryCount, setPoetryCount] = useState(allPoetries.length);
+  const [poetries, setPoetries] = useState(poetryData.slice(0, numberOfPoetriesOnPage));
+  const [poetryCount, setPoetryCount] = useState(poetryData.length);
 
   const [newPoetryTitle, setNewPoetryTitle] = useState('');
   const [newPoetryContent, setNewPoetryContent] = useState('');
@@ -150,17 +152,19 @@ function App() {
   const [newPoetryDate, setNewPoetryDate] = useState(new Date());
 
   useEffect(() => {
-    setPoetries(allPoetries.slice(0, 3));
+    localStorage.setItem('poetries', JSON.stringify(allPoetries));
+    console.log(poetryData.slice(0, 3));
+    // setPoetries(allPoetries.slice(0, 3));
   }, []);
 
   useEffect(() => {
-    setPoetryCount(allPoetries.length);
+    setPoetryCount(poetryData.length);
     console.log('CHANGE...!');
-  }, [allPoetries.length]);
+  }, [poetryData.length]);
 
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(
-    allPoetries.length === numberOfPoetriesOnPage ? false : true
+    poetryData.length === numberOfPoetriesOnPage ? false : true
   );
 
   const addItem = (data) => {
@@ -174,7 +178,7 @@ function App() {
     setNewPoetryImg('');
     setNewPoetryJoke('');
     setNewPoetryFace(true);
-    setNewPoetryDate(new Date());
+    setNewPoetryDate(format(new Date(), 'yyyy-MM-dd'));
   };
 
   const handleClick = (id) => {
@@ -195,7 +199,7 @@ function App() {
     console.log('next page loading...');
     console.log(currentStartIndex);
     setCurrentStartIndex(currentStartIndex + numberOfPoetriesOnPage);
-    const newPoetries = allPoetries.slice(
+    const newPoetries = poetryData.slice(
       currentStartIndex,
       currentStartIndex + numberOfPoetriesOnPage
     );
@@ -208,7 +212,7 @@ function App() {
 
     if (
       newPoetries[newPoetries.length - 1] ===
-      allPoetries[allPoetries.length - 1]
+      poetryData[poetryData.length - 1]
     ) {
       setShowRightArrow(false);
       setShowRightArrow(false);
@@ -220,12 +224,12 @@ function App() {
     console.log('prev page loading...');
     console.log(currentStartIndex);
     setCurrentStartIndex(currentStartIndex - numberOfPoetriesOnPage);
-    const newPoetries = allPoetries.slice(
+    const newPoetries = poetryData.slice(
       currentStartIndex - numberOfPoetriesOnPage * 2,
       currentStartIndex - numberOfPoetriesOnPage
     );
     setPoetries(newPoetries);
-    if (newPoetries[0] === allPoetries[0]) {
+    if (newPoetries[0] === poetryData[0]) {
       setShowLeftArrow(false);
       setShowLeftArrow(false);
     }
@@ -237,7 +241,7 @@ function App() {
     e.preventDefault();
 
     // const newPoetryId = (allPoetries.length ? allPoetries[allPoetries.length - 1].id + 1 : 1);
-    const newPoetryId = allPoetries.length;
+    const newPoetryId = poetryData.length;
 
     const newPoetry = {
       id: newPoetryId,
