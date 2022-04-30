@@ -169,7 +169,7 @@ function App() {
 
   const addItem = (data) => {
     allPoetries.push(data);
-    console.log(allPoetries.length);
+    localStorage.setItem('poetries', JSON.stringify(allPoetries));
   };
 
   const clearAddPoetryForm = () => {
